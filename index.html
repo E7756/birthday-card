@@ -13,19 +13,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f4efea;
+            background: #f3efe9;
             padding: 15px;
             overflow-x: hidden;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: #ffffff;
             width: 100%;
             max-width: 380px;
             min-height: 580px;
             padding: 30px 20px;
             border-radius: 32px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
             border: 1px solid #eae5dd;
             text-align: center;
             position: relative;
@@ -36,110 +36,104 @@
             overflow: hidden;
         }
 
-        .brand { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: #4a4a4a; margin-bottom: 2px; }
-        .subtitle { font-size: 0.68rem; color: #9a9a9a; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 15px; }
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: #333; margin-bottom: 2px; }
+        .subtitle { font-size: 0.68rem; color: #a0a0a0; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 15px; }
         
         .step { display: none; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.6s ease-in-out forwards; position: relative; z-index: 2; }
         .step.active { display: flex; }
 
-        .main-title { font-family: 'Amiri', serif; font-size: 2rem; color: #333; line-height: 1.4; margin-bottom: 15px; font-weight: 700; }
+        .main-title { font-family: 'Amiri', serif; font-size: 2.2rem; color: #2c2c2c; line-height: 1.4; margin-bottom: 10px; font-weight: 700; }
         .divider { width: 45px; height: 2px; background-color: #cbcfc4; margin: 0 auto 20px auto; border-radius: 2px; }
-        .description { font-size: 0.95rem; color: #666; margin-bottom: 15px; line-height: 1.6; }
+        .description { font-size: 0.95rem; color: #777; margin-top: 5px; margin-bottom: 10px; line-height: 1.6; }
 
         .btn {
-            background-color: #4a5d43;
+            background-color: #485643;
             color: #ffffff;
             border: none;
-            padding: 13px 40px;
-            font-size: 1rem;
+            padding: 14px 45px;
+            font-size: 1.05rem;
             border-radius: 30px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(74, 93, 67, 0.25);
-            margin-top: 10px;
+            box-shadow: 0 4px 14px rgba(72, 86, 67, 0.2);
+            margin-top: 15px;
+            z-index: 10;
         }
-        .btn:hover { background-color: #3b4b35; transform: translateY(-2px); }
+        .btn:hover { background-color: #384434; transform: translateY(-2px); }
 
-        /* البالونات التفاعلية للخطوة 2 */
-        .balloons-container { display: flex; gap: 25px; margin: 30px 0; height: 90px; align-items: center; }
-        .balloon-pop {
-            width: 52px; height: 68px; background: #e09f9c; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-            cursor: pointer; position: relative; transition: transform 0.6s ease, opacity 0.6s ease;
-            animation: float 3s ease-in-out infinite alternate;
-        }
-        .balloon-pop::after { content: ''; position: absolute; bottom: -12px; left: 50%; width: 1px; height: 15px; background: #bbb; }
-        .balloon-pop:nth-child(2) { background: #d9b48f; animation-delay: 0.5s; }
-        .balloon-pop:nth-child(3) { background: #9cb3a8; animation-delay: 1s; }
-        .balloon-pop.popped { transform: translateY(-80px) scale(0.5); opacity: 0; pointer-events: none; }
-
-        /* خلفية البالونات الناعمة */
-        .bg-balloons { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .bg-balloon { position: absolute; border-radius: 50%; opacity: 0.45; }
-        .bg-b1 { width: 90px; height: 110px; background: #d9b5b5; top: 120px; right: -25px; }
-        .bg-b2 { width: 80px; height: 100px; background: #b8c4b7; bottom: 100px; left: -30px; }
-
-        /* الكيكة المحسنة والمضبوطة */
-        .cake-stage {
-            margin: 50px 0 25px 0; /* مسافة علوية كافية لإبعاد الشمعة تماماً عن النص */
+        /* منطقة البالونات المتحركة في الخطوة 2 */
+        .balloon-game-area {
             position: relative;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .candle-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: -5px; /* دمج الشمعة مع أعلى الكيكة */
-            z-index: 3;
-        }
-
-        .candle-flame {
-            width: 14px;
-            height: 20px;
-            background: #ff9800;
-            border-radius: 50% 50% 20% 20%;
-            margin-bottom: 2px;
-            box-shadow: 0 0 10px #ff9800;
-            animation: flicker 0.6s infinite alternate;
-        }
-        .candle-flame.off { display: none; }
-
-        .candle-stick {
-            width: 12px;
-            height: 45px;
-            background: #4a5d43;
-            border-radius: 3px;
-        }
-
-        .cake-container {
-            width: 190px;
-            position: relative;
-        }
-
-        .cake-cream {
             width: 100%;
-            height: 35px;
-            background: #ffffff;
-            border-radius: 20px 20px 12px 12px;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+            height: 250px;
+            margin: 10px 0;
         }
 
-        .cake-body {
+        .pop-balloon {
+            position: absolute;
+            width: 48px;
+            height: 62px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            animation: floatFly 4s ease-in-out infinite alternate;
+        }
+        .pop-balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            width: 1px;
+            height: 14px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* تفجير البالون عند الضغط */
+        .pop-balloon.popped {
+            transform: scale(1.4);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ألوان ومواقع البالونات الكثيرة */
+        .b-1 { background: #e09f9c; top: 20px; left: 15%; animation-duration: 3.2s; }
+        .b-2 { background: #9cb3a8; top: 60px; right: 20%; animation-duration: 4.5s; animation-delay: 0.5s; }
+        .b-3 { background: #d9b48f; top: 120px; left: 35%; animation-duration: 3.8s; animation-delay: 1s; }
+        .b-4 { background: #b5c3d5; top: 40px; right: 10%; animation-duration: 4.1s; animation-delay: 0.3s; }
+        .b-5 { background: #e8c4b8; top: 150px; left: 10%; animation-duration: 3.5s; animation-delay: 0.7s; }
+        .b-6 { background: #a6c0b5; top: 160px; right: 15%; animation-duration: 4.8s; animation-delay: 1.2s; }
+        .b-7 { background: #d3ad8d; top: 80px; left: 45%; animation-duration: 3.9s; animation-delay: 0.2s; }
+        .b-8 { background: #dda3a0; top: 10px; left: 50%; transform: translateX(-50%); animation-duration: 4.2s; animation-delay: 0.9s; }
+
+        /* البالونات الناعمة في خلفية الخطوة 3 */
+        .bg-balloons-svg {
+            position: absolute;
             width: 100%;
-            height: 70px;
-            background: #c27c62;
-            border-radius: 0 0 20px 20px;
-            margin-top: -15px;
-            position: relative;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
             z-index: 1;
         }
+
+        /* الكيكة والشمعة */
+        .cake-graphic-container {
+            position: relative;
+            width: 240px;
+            height: 200px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .flame-light {
+            animation: flicker 0.6s infinite alternate;
+            transform-origin: center bottom;
+        }
+        .flame-light.off { display: none; }
 
         /* الأسطوانة */
         .vinyl {
@@ -155,8 +149,12 @@
         .vinyl-inner { width: 55px; height: 55px; background: #e5dfd3; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.65rem; color: #555; border: 2px solid #ccc; }
         .spinning { animation: spin 3.5s linear infinite; }
 
-        @keyframes float { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px); } }
-        @keyframes flicker { from { opacity: 0.8; } to { opacity: 1; transform: scale(1.1); } }
+        @keyframes floatFly {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(4deg); }
+            100% { transform: translateY(10px) rotate(-4deg); }
+        }
+        @keyframes flicker { from { opacity: 0.85; transform: scale(0.95); } to { opacity: 1; transform: scale(1.08); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -177,36 +175,46 @@
             <button class="btn" onclick="nextStep(2, 'SOMETHING FOR YOU')">افتحيها</button>
         </div>
 
-        <!-- الخطوة 2 -->
+        <!-- الخطوة 2 (فعالية البالونات الكثيرة) -->
         <div id="step2" class="step">
             <h1 class="main-title">اليوم مو يوم عادي...</h1>
-            <p class="description">لأن اليوم يوم شخص مميز.<br>اضغطي على ثلاث بالونات 🎈</p>
-            <div class="balloons-container">
-                <div class="balloon-pop" onclick="popBalloon(this)"></div>
-                <div class="balloon-pop" onclick="popBalloon(this)"></div>
-                <div class="balloon-pop" onclick="popBalloon(this)"></div>
+            <p class="description">فرقعي البالونات الطائرة! 🎈</p>
+            
+            <div class="balloon-game-area">
+                <div class="pop-balloon b-1" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-2" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-3" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-4" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-5" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-6" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-7" onclick="popBalloon(this)"></div>
+                <div class="pop-balloon b-8" onclick="popBalloon(this)"></div>
             </div>
+
             <button id="btn-step2" class="btn" style="display:none;" onclick="nextStep(3, 'MAKE A WISH')">التالي</button>
         </div>
 
         <!-- الخطوة 3 -->
         <div id="step3" class="step">
-            <div class="bg-balloons">
-                <div class="bg-balloon bg-b1"></div>
-                <div class="bg-balloon bg-b2"></div>
-            </div>
+            <svg class="bg-balloons-svg" viewBox="0 0 380 500" fill="none">
+                <path d="M-10 260 C-10 210, 40 210, 40 260 C40 310, -10 310, -10 260 Z" fill="#b9c7b6" opacity="0.45"/>
+                <line x1="15" y1="310" x2="5" y2="450" stroke="#bbb" stroke-width="1" opacity="0.3"/>
+                
+                <path d="M330 200 C330 150, 390 150, 390 200 C390 250, 330 250, 330 200 Z" fill="#e5b8b7" opacity="0.45"/>
+                <line x1="360" y1="250" x2="370" y2="420" stroke="#bbb" stroke-width="1" opacity="0.3"/>
+                
+                <path d="M320 280 C320 230, 380 230, 380 280 C380 330, 320 330, 320 280 Z" fill="#ebd2be" opacity="0.4"/>
+            </svg>
 
             <h1 class="main-title">كل عام وأنتِ بخير يا سارة</h1>
             
-            <div class="cake-stage">
-                <div class="candle-wrapper">
-                    <div id="flame" class="candle-flame"></div>
-                    <div class="candle-stick"></div>
-                </div>
-                <div class="cake-container">
-                    <div class="cake-cream"></div>
-                    <div class="cake-body"></div>
-                </div>
+            <div class="cake-graphic-container">
+                <svg width="220" height="190" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="flame" class="flame-light" d="M110 22 C114 30, 116 35, 110 44 C104 35, 106 30, 110 22 Z" fill="#F39C12"/>
+                    <rect x="106" y="44" width="8" height="35" rx="3" fill="#485643"/>
+                    <rect x="25" y="95" width="170" height="65" rx="16" fill="#C67D63"/>
+                    <path d="M20 95 C20 85, 30 75, 45 75 L175 75 C190 75, 200 85, 200 95 C200 102, 190 105, 180 100 C170 95, 160 106, 150 100 C140 94, 130 106, 120 100 C110 94, 100 106, 90 100 C80 94, 70 106, 60 100 C50 94, 40 105, 30 100 C23 96, 20 100, 20 95 Z" fill="#FFFFFF"/>
+                </svg>
             </div>
 
             <p class="description">تمني أمنية قبل ما تطفي الشمعة.</p>
@@ -248,7 +256,7 @@
             if (!element.classList.contains('popped')) {
                 element.classList.add('popped');
                 poppedCount++;
-                if (poppedCount === 3) {
+                if (poppedCount >= 3) {
                     document.getElementById('btn-step2').style.display = 'inline-block';
                 }
             }
