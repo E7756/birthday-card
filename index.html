@@ -13,18 +13,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f5f2eb;
-            padding: 20px;
+            background: #f4efea;
+            padding: 15px;
             overflow-x: hidden;
         }
 
         .card {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
             width: 100%;
             max-width: 380px;
-            min-height: 540px;
-            padding: 35px 25px;
-            border-radius: 28px;
+            min-height: 580px;
+            padding: 30px 20px;
+            border-radius: 32px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             border: 1px solid #eae5dd;
             text-align: center;
@@ -33,61 +34,123 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden;
         }
 
-        .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #4a4a4a; margin-bottom: 4px; }
-        .subtitle { font-size: 0.7rem; color: #9a9a9a; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: #4a4a4a; margin-bottom: 2px; }
+        .subtitle { font-size: 0.68rem; color: #9a9a9a; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 15px; }
         
-        .step { display: none; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.6s ease-in-out forwards; }
+        .step { display: none; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.6s ease-in-out forwards; position: relative; z-index: 2; }
         .step.active { display: flex; }
 
-        .main-title { font-family: 'Amiri', serif; font-size: 2rem; color: #333; line-height: 1.4; margin-bottom: 15px; font-weight: 700; }
+        .main-title { font-family: 'Amiri', serif; font-size: 2.1rem; color: #333; line-height: 1.4; margin-bottom: 15px; font-weight: 700; }
         .divider { width: 45px; height: 2px; background-color: #cbcfc4; margin: 0 auto 20px auto; border-radius: 2px; }
-        .description { font-size: 0.95rem; color: #777; margin-bottom: 20px; line-height: 1.6; }
+        .description { font-size: 0.98rem; color: #666; margin-bottom: 20px; line-height: 1.6; }
 
         .btn {
-            background-color: #6d7865;
+            background-color: #727d6a;
             color: #ffffff;
             border: none;
-            padding: 12px 40px;
-            font-size: 1rem;
+            padding: 14px 45px;
+            font-size: 1.05rem;
             border-radius: 30px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(109,120,101,0.2);
-            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(114, 125, 106, 0.25);
+            margin-top: 15px;
         }
-        .btn:hover { background-color: #5a6453; transform: translateY(-2px); }
+        .btn:hover { background-color: #5d6756; transform: translateY(-2px); }
 
-        /* البالونات التفاعلية مع حركة طفو */
-        .balloons-container { display: flex; gap: 25px; margin: 35px 0; height: 90px; align-items: center; }
-        .balloon {
+        /* البالونات التفاعلية للخطوة 2 */
+        .balloons-container { display: flex; gap: 25px; margin: 30px 0; height: 90px; align-items: center; }
+        .balloon-pop {
             width: 52px; height: 68px; background: #e09f9c; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
             cursor: pointer; position: relative; transition: transform 0.6s ease, opacity 0.6s ease;
             animation: float 3s ease-in-out infinite alternate;
         }
-        .balloon::after { content: ''; position: absolute; bottom: -12px; left: 50%; width: 1px; height: 15px; background: #bbb; }
-        .balloon:nth-child(2) { background: #d9b48f; animation-delay: 0.5s; }
-        .balloon:nth-child(3) { background: #9cb3a8; animation-delay: 1s; }
-        
-        /* تأثير الطيران عند الضغط */
-        .balloon.popped { transform: translateY(-80px) scale(0.5); opacity: 0; pointer-events: none; }
+        .balloon-pop::after { content: ''; position: absolute; bottom: -12px; left: 50%; width: 1px; height: 15px; background: #bbb; }
+        .balloon-pop:nth-child(2) { background: #d9b48f; animation-delay: 0.5s; }
+        .balloon-pop:nth-child(3) { background: #9cb3a8; animation-delay: 1s; }
+        .balloon-pop.popped { transform: translateY(-80px) scale(0.5); opacity: 0; pointer-events: none; }
 
-        /* الكيكة والشمعة مع ضبط المسافات */
-        .cake-wrapper {
-            margin: 40px 0 30px 0; /* مسافة أفقية إضافية لإبعاد الكيكة عن الكلام */
-            padding-top: 30px;
-            width: 100%;
+        /* خلفية البالونات في شاشة الكيكة */
+        .bg-balloons { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .bg-balloon { position: absolute; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; opacity: 0.5; }
+        .bg-balloon::after { content: ''; position: absolute; bottom: -100px; left: 50%; width: 1px; height: 100px; background: rgba(0,0,0,0.15); }
+
+        .bg-b1 { width: 75px; height: 95px; background: #d9b5b5; top: 30px; right: -20px; }
+        .bg-b2 { width: 65px; height: 85px; background: #b8c4b7; bottom: 120px; left: -25px; }
+        .bg-b3 { width: 70px; height: 90px; background: #e0c8b6; bottom: 180px; right: -25px; }
+
+        /* الكيكة المطابقة للصورة */
+        .cake-stage {
+            margin: 25px 0 20px 0;
+            position: relative;
+            width: 210px;
+            height: 160px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
         }
-        .cake-container { position: relative; }
-        .cake { width: 150px; height: 85px; background: #e6c5b8; border-radius: 20px 20px 10px 10px; position: relative; margin: 0 auto; }
-        .cake::before { content: ''; position: absolute; top: -18px; left: 10px; width: 130px; height: 32px; background: #fff; border-radius: 20px; }
-        .candle { width: 10px; height: 35px; background: #7c8872; position: absolute; top: -48px; left: 50%; transform: translateX(-50%); border-radius: 3px; }
-        .flame { width: 12px; height: 18px; background: #ff9800; border-radius: 50% 50% 20% 20%; position: absolute; top: -16px; left: 50%; transform: translateX(-50%); animation: flicker 0.6s infinite alternate; }
-        .flame.off { display: none; }
+        
+        .cake-body {
+            width: 190px;
+            height: 95px;
+            background: #cd9b87;
+            border-radius: 20px 20px 16px 16px;
+            position: relative;
+            box-shadow: inset 0 -8px 0 rgba(0,0,0,0.06);
+        }
+
+        .cake-cream {
+            position: absolute;
+            top: -20px;
+            left: -5px;
+            width: 200px;
+            height: 45px;
+            background: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+        }
+        
+        .cake-cream::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 160px;
+            height: 15px;
+            background: #ffffff;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .candle-stick {
+            width: 12px;
+            height: 50px;
+            background: #7c8872;
+            position: absolute;
+            top: -65px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .candle-flame {
+            width: 14px;
+            height: 22px;
+            background: #e09349;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #e09349;
+            animation: flicker 0.6s infinite alternate;
+        }
+        .candle-flame.off { display: none; }
 
         /* الأسطوانة */
         .vinyl {
@@ -103,8 +166,8 @@
         .vinyl-inner { width: 55px; height: 55px; background: #e5dfd3; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.65rem; color: #555; border: 2px solid #ccc; }
         .spinning { animation: spin 3.5s linear infinite; }
 
-        @keyframes float { 0% { transform: translateY(0px); } 100% { transform: translateY(-10px); } }
-        @keyframes flicker { from { opacity: 0.8; } to { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+        @keyframes float { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px); } }
+        @keyframes flicker { from { opacity: 0.8; } to { opacity: 1; transform: translateX(-50%) scale(1.08); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -130,22 +193,30 @@
             <h1 class="main-title">اليوم مو يوم عادي...</h1>
             <p class="description">لأن اليوم يوم شخص مميز.<br>اضغطي على ثلاث بالونات 🎈</p>
             <div class="balloons-container">
-                <div class="balloon" onclick="popBalloon(this)"></div>
-                <div class="balloon" onclick="popBalloon(this)"></div>
-                <div class="balloon" onclick="popBalloon(this)"></div>
+                <div class="balloon-pop" onclick="popBalloon(this)"></div>
+                <div class="balloon-pop" onclick="popBalloon(this)"></div>
+                <div class="balloon-pop" onclick="popBalloon(this)"></div>
             </div>
             <button id="btn-step2" class="btn" style="display:none;" onclick="nextStep(3, 'MAKE A WISH')">التالي</button>
         </div>
 
-        <!-- الخطوة 3 -->
+        <!-- الخطوة 3 (الكيكة المطابقة للصورة) -->
         <div id="step3" class="step">
-            <h1 class="main-title">كل عام وأنتِ بخير يا سارة</h1>
+            <!-- بالونات خلفية ديكورية -->
+            <div class="bg-balloons">
+                <div class="bg-balloon bg-b1"></div>
+                <div class="bg-balloon bg-b2"></div>
+                <div class="bg-balloon bg-b3"></div>
+            </div>
+
+            <h1 class="main-title" style="margin-bottom: 5px;">كل عام وأنتِ بخير يا سارة</h1>
             
-            <!-- مسافة إضافية للحفاظ على الكيكة بعيدة عن العنوان -->
-            <div class="cake-wrapper">
-                <div class="cake-container">
-                    <div class="candle"><div id="flame" class="flame"></div></div>
-                    <div class="cake"></div>
+            <div class="cake-stage">
+                <div class="candle-stick">
+                    <div id="flame" class="candle-flame"></div>
+                </div>
+                <div class="cake-body">
+                    <div class="cake-cream"></div>
                 </div>
             </div>
 
