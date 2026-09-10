@@ -62,7 +62,39 @@
         }
         .btn:hover { background-color: #384434; transform: translateY(-2px); }
 
-        /* منطقة البالونات المتحركة في الخطوة 2 */
+        /* تصميم صفحة القفل والتاريخ */
+        .lock-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        .date-input {
+            width: 80%;
+            padding: 14px;
+            font-size: 1.1rem;
+            text-align: center;
+            border: 2px solid #eae5dd;
+            border-radius: 20px;
+            background: #faf7f2;
+            color: #485643;
+            outline: none;
+            font-family: 'Tajawal', sans-serif;
+            margin: 15px 0 10px 0;
+            transition: all 0.3s ease;
+        }
+        .date-input:focus {
+            border-color: #485643;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(72, 86, 67, 0.15);
+        }
+        .error-msg {
+            color: #c67d63;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* منطقة البالونات المتحركة في الخطوة 3 */
         .balloon-game-area {
             position: relative;
             width: 100%;
@@ -147,18 +179,8 @@
         .spinning { animation: spin 3.5s linear infinite; }
 
         /* صفحة توقع الهدية */
-        .gift-container {
-            margin: 10px 0 5px 0;
-        }
-
-        .guess-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
+        .gift-container { margin: 10px 0 5px 0; }
+        .guess-options { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 10px; }
         .guess-card {
             background: #faf7f2;
             border: 1.5px solid #eae5dd;
@@ -170,7 +192,6 @@
             transition: all 0.3s ease;
             text-align: center;
         }
-
         .guess-card:hover, .guess-card.selected {
             background: #eef2ec;
             border-color: #485643;
@@ -190,26 +211,11 @@
             text-align: right;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
         }
-        .letter-content {
-            font-size: 0.98rem;
-            color: #4a4a4a;
-            line-height: 1.8;
-            font-family: 'Tajawal', sans-serif;
-        }
-        .letter-signature {
-            text-align: left;
-            margin-top: 15px;
-            font-family: 'Amiri', serif;
-            font-size: 1.1rem;
-            color: #485643;
-            font-weight: bold;
-        }
+        .letter-content { font-size: 0.98rem; color: #4a4a4a; line-height: 1.8; font-family: 'Tajawal', sans-serif; }
+        .letter-signature { text-align: left; margin-top: 15px; font-family: 'Amiri', serif; font-size: 1.1rem; color: #485643; font-weight: bold; }
 
-        @keyframes floatFly {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-18px) rotate(4deg); }
-            100% { transform: translateY(10px) rotate(-4deg); }
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+        @keyframes floatFly { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-18px) rotate(4deg); } 100% { transform: translateY(10px) rotate(-4deg); } }
         @keyframes flicker { from { opacity: 0.85; transform: scale(0.95); } to { opacity: 1; transform: scale(1.08); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -220,12 +226,24 @@
     <div class="card">
         <div>
             <div class="brand">Letters ♡</div>
-            <div id="step-subtitle" class="subtitle">A LITTLE BIRTHDAY SURPRISE</div>
+            <div id="step-subtitle" class="subtitle">ENTER SECRET DATE</div>
+        </div>
+
+        <!-- الخطوة 0: صفحة إدخال التاريخ والقفل -->
+        <div id="step0" class="step active">
+            <div class="lock-icon">🔒</div>
+            <h1 class="main-title">مُغلق بالحب ♡</h1>
+            <p class="description">اكتبي تاريخ ذكرى هذا اليوم للدخول... 🔑</p>
+            
+            <input type="text" id="secretDate" class="date-input" placeholder="مثال: 1/7" autocomplete="off">
+            <p id="errorMsg" class="error-msg">التاريخ غير صحيح، حاولي مرة أخرى! 🤍</p>
+            
+            <button class="btn" onclick="checkDate()">فك لغز البوابة ✨</button>
         </div>
 
         <!-- الخطوة 1 -->
-        <div id="step1" class="step active">
-            <h1 class="main-title">عندي لكِ شيء<br>صغير يا عهود...</h1>
+        <div id="step1" class="step">
+            <h1 class="main-title">عندي لكِ شيء<br>صغير يا سارة...</h1>
             <div class="divider"></div>
             <p class="description">شيء بسيط، بس معمول مخصوص لك.</p>
             <button class="btn" onclick="nextStep(2, 'SOMETHING FOR YOU')">افتحيها</button>
@@ -262,7 +280,7 @@
                 <path d="M320 280 C320 230, 380 230, 380 280 C380 330, 320 330, 320 280 Z" fill="#ebd2be" opacity="0.4"/>
             </svg>
 
-            <h1 class="main-title">كل عام وأنتِ بخير يا عهود</h1>
+            <h1 class="main-title">كل عام وأنتِ بخير يا سارة</h1>
             
             <div class="cake-graphic-container">
                 <svg width="220" height="190" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -326,13 +344,13 @@
             
             <div class="letter-box">
                 <p class="letter-content">
-                    عهود الوايفي،<br><br>
+                    سارة العزيزة،<br><br>
                     كل عام وأنتِ بخير وصحة وسعادة. أتمنى لك سنة جديدة مليئة بالأيام الجميلة واللحظات اللطيفة التي تشبه قلبك. دمتِ دائماً مصدر فرحة لكل من حولك ✨
                 </p>
-                <div class="letter-signature">مع الحب الهازبند ♡</div>
+                <div class="letter-signature">مع كامل المحبة ♡</div>
             </div>
 
-            <button class="btn" onclick="nextStep(1, 'A LITTLE BIRTHDAY SURPRISE')">إعادة من البداية 🔄</button>
+            <button class="btn" onclick="nextStep(0, 'ENTER SECRET DATE')">إعادة من البداية 🔄</button>
         </div>
 
         <div></div>
@@ -340,6 +358,21 @@
     </div>
 
     <script>
+        // التاريخ الصحيح لفك القفل (يمكنك تعديله هنا)
+        const CORRECT_DATE = "16/04/2026"; 
+
+        function checkDate() {
+            var inputVal = document.getElementById('secretDate').value.trim();
+            var errorMsg = document.getElementById('errorMsg');
+            
+            if (inputVal === CORRECT_DATE || inputVal === "01/07" || inputVal === "1/07") {
+                errorMsg.style.display = "none";
+                nextStep(1, 'A LITTLE BIRTHDAY SURPRISE');
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+
         let poppedCount = 0;
 
         function nextStep(stepNum, subtitleText) {
