@@ -89,14 +89,12 @@
             background: rgba(0,0,0,0.2);
         }
 
-        /* تفجير البالون عند الضغط */
         .pop-balloon.popped {
             transform: scale(1.4);
             opacity: 0;
             pointer-events: none;
         }
 
-        /* ألوان ومواقع البالونات الكثيرة */
         .b-1 { background: #e09f9c; top: 20px; left: 15%; animation-duration: 3.2s; }
         .b-2 { background: #9cb3a8; top: 60px; right: 20%; animation-duration: 4.5s; animation-delay: 0.5s; }
         .b-3 { background: #d9b48f; top: 120px; left: 35%; animation-duration: 3.8s; animation-delay: 1s; }
@@ -106,7 +104,6 @@
         .b-7 { background: #d3ad8d; top: 80px; left: 45%; animation-duration: 3.9s; animation-delay: 0.2s; }
         .b-8 { background: #dda3a0; top: 10px; left: 50%; transform: translateX(-50%); animation-duration: 4.2s; animation-delay: 0.9s; }
 
-        /* البالونات الناعمة في خلفية الخطوة 3 */
         .bg-balloons-svg {
             position: absolute;
             width: 100%;
@@ -137,7 +134,7 @@
 
         /* الأسطوانة */
         .vinyl {
-            width: 160px; height: 160px;
+            width: 150px; height: 150px;
             background: radial-gradient(circle, #333 30%, #111 70%);
             border-radius: 50%; margin: 15px auto;
             border: 6px solid #222; display: flex;
@@ -146,8 +143,67 @@
             cursor: pointer; transition: transform 0.3s;
         }
         .vinyl:hover { transform: scale(1.03); }
-        .vinyl-inner { width: 55px; height: 55px; background: #e5dfd3; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.65rem; color: #555; border: 2px solid #ccc; }
+        .vinyl-inner { width: 50px; height: 50px; background: #e5dfd3; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.65rem; color: #555; border: 2px solid #ccc; }
         .spinning { animation: spin 3.5s linear infinite; }
+
+        /* صفحة توقع الهدية */
+        .gift-container {
+            margin: 15px 0 10px 0;
+        }
+
+        .guess-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .guess-card {
+            background: #faf7f2;
+            border: 1.5px solid #eae5dd;
+            padding: 12px 18px;
+            border-radius: 16px;
+            color: #4a4a4a;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .guess-card:hover, .guess-card.selected {
+            background: #eef2ec;
+            border-color: #485643;
+            color: #2c2c2c;
+            font-weight: bold;
+            transform: translateY(-2px);
+        }
+
+        /* صفحة الرسالة */
+        .letter-box {
+            background: #faf7f2;
+            border: 1px dashed #d5ceb8;
+            padding: 22px 18px;
+            border-radius: 20px;
+            margin: 15px 0;
+            width: 100%;
+            text-align: right;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.01);
+        }
+        .letter-content {
+            font-size: 0.98rem;
+            color: #4a4a4a;
+            line-height: 1.8;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .letter-signature {
+            text-align: left;
+            margin-top: 15px;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: #485643;
+            font-weight: bold;
+        }
 
         @keyframes floatFly {
             0% { transform: translateY(0px) rotate(0deg); }
@@ -169,13 +225,13 @@
 
         <!-- الخطوة 1 -->
         <div id="step1" class="step active">
-            <h1 class="main-title">عندي لكِ شيء<br>صغير يا عهود...</h1>
+            <h1 class="main-title">عندي لكِ شيء<br>صغير يا سارة...</h1>
             <div class="divider"></div>
             <p class="description">شيء بسيط، بس معمول مخصوص لك.</p>
             <button class="btn" onclick="nextStep(2, 'SOMETHING FOR YOU')">افتحيها</button>
         </div>
 
-        <!-- الخطوة 2 (فعالية البالونات الكثيرة) -->
+        <!-- الخطوة 2 -->
         <div id="step2" class="step">
             <h1 class="main-title">اليوم مو يوم عادي...</h1>
             <p class="description">فرقعي البالونات الطائرة! 🎈</p>
@@ -206,14 +262,14 @@
                 <path d="M320 280 C320 230, 380 230, 380 280 C380 330, 320 330, 320 280 Z" fill="#ebd2be" opacity="0.4"/>
             </svg>
 
-            <h1 class="main-title">كل عام وأنتِ بخير يا عهود</h1>
+            <h1 class="main-title">كل عام وأنتِ بخير يا سارة</h1>
             
             <div class="cake-graphic-container">
                 <svg width="220" height="190" viewBox="0 0 220 190" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path id="flame" class="flame-light" d="M110 22 C114 30, 116 35, 110 44 C104 35, 106 30, 110 22 Z" fill="#F39C12"/>
                     <rect x="106" y="44" width="8" height="35" rx="3" fill="#485643"/>
                     <rect x="25" y="95" width="170" height="65" rx="16" fill="#C67D63"/>
-                    <path d="M20 95 C20 85, 30 75, 45 75 L175 75 C190 75, 200 85, 200 95 C200 102, 190 105, 180 100 C170 95, 160 106, 150 100 C140 94, 130 106, 120 100 C110 94, 100 106, 90 100 C80 94, 70 106, 60 100 C50 94, 40 105, 30 100 C23 96, 20 100, 20 95 Z" fill="#FFFFFF"/>
+                    <path d="M20 95 C20 85, 30 75, 45 75 L175 75 C190 75, 200 85, 200 95 C200 102, 190 105, 180 100 C170 95, 160 106, 150 100 C140 94, 130 106, 60 100 C50 94, 40 105, 30 100 C23 96, 20 100, 20 95 Z" fill="#FFFFFF"/>
                 </svg>
             </div>
 
@@ -221,7 +277,7 @@
             <button id="btn-candle" class="btn" onclick="blowCandle()">اطفي الشمعة</button>
         </div>
 
-        <!-- الخطوة 4 -->
+        <!-- الخطوة 4 (الأغنية) -->
         <div id="step4" class="step">
             <h1 class="main-title">أغنية تذكرني فيكِ</h1>
             <p class="description">في أغنية كل ما سمعتها تذكرتك...</p>
@@ -230,13 +286,59 @@
                 <div class="vinyl-inner">♡ Letters</div>
             </div>
 
-            <p class="description" style="margin-bottom: 10px;">أغنية خاصة لك<br><small>اسمعيها قبل الرسالة</small></p>
+            <p class="description" style="margin-bottom: 5px;">أغنية خاصة لك<br><small>اضغطي للاستماع</small></p>
             
             <button id="play-btn" class="btn" onclick="toggleMusic()">► اسمعيها</button>
+            
+            <button id="next-to-guess" class="btn" style="display:none; background-color: #6c7a67; margin-top: 10px;" onclick="nextStep(5, 'YOUR GIFT')">التالي 🎁</button>
+        </div>
 
-            <div id="final-text" style="display:none; margin-top: 15px; color: #4a4a4a; font-size: 0.95rem; line-height: 1.6;">
-                ✨ كل عام وأنتِ بألف خير وسعادة يا رب ✨
+        <!-- الخطوة 5 الجديدة (توقع الهدية) -->
+        <div id="step5" class="step">
+            <h1 class="main-title">وقت فتح الهدية! 🎁</h1>
+            <p class="description">قبل ما تفتحيها... وش تتوقعي هديتك؟</p>
+
+            <div class="gift-container">
+                <svg width="110" height="110" viewBox="0 0 100 100" fill="none">
+                    <!-- صندوق الهدية -->
+                    <rect x="20" y="40" width="60" height="45" rx="8" fill="#C67D63"/>
+                    <!-- غطاء الهدية -->
+                    <rect x="16" y="32" width="68" height="14" rx="4" fill="#d99379"/>
+                    <!-- الشريط الرأسي -->
+                    <rect x="44" y="32" width="12" height="53" fill="#485643"/>
+                    <!-- الشريط الأفقي -->
+                    <rect x="20" y="55" width="60" height="10" fill="#485643"/>
+                    <!-- الفيونكة -->
+                    <circle cx="42" cy="26" r="8" fill="#485643"/>
+                    <circle cx="58" cy="26" r="8" fill="#485643"/>
+                    <circle cx="50" cy="28" r="4" fill="#384434"/>
+                </svg>
             </div>
+
+            <div class="guess-options">
+                <div class="guess-card" onclick="selectGuess(this)">شيء كنتِ تتمنينه من زمان؟ ✨</div>
+                <div class="guess-card" onclick="selectGuess(this)">مفاجأة لطيفة وبسيطة؟ 🤍</div>
+                <div class="guess-card" onclick="selectGuess(this)">شيء يظل معاكِ ويسعدك؟ 🌸</div>
+            </div>
+
+            <p id="guess-response" class="description" style="margin-top: 12px; font-weight: bold; color: #485643; display: none;"></p>
+
+            <button id="next-to-letter" class="btn" style="display:none; margin-top: 10px;" onclick="nextStep(6, 'SPECIAL MESSAGE')">افتحي الهدية ✨</button>
+        </div>
+
+        <!-- الخطوة 6 (صفحة الرسالة الخاصة) -->
+        <div id="step6" class="step">
+            <h1 class="main-title">رسالة لكِ ♡</h1>
+            
+            <div class="letter-box">
+                <p class="letter-content">
+                    سارة العزيزة،<br><br>
+                    كل عام وأنتِ بخير وصحة وسعادة. أتمنى لك سنة جديدة مليئة بالأيام الجميلة واللحظات اللطيفة التي تشبه قلبك. دمتِ دائماً مصدر فرحة لكل من حولك ✨
+                </p>
+                <div class="letter-signature">مع كامل المحبة ♡</div>
+            </div>
+
+            <button class="btn" onclick="nextStep(1, 'A LITTLE BIRTHDAY SURPRISE')">إعادة من البداية 🔄</button>
         </div>
 
         <div></div>
@@ -275,18 +377,29 @@
             var music = document.getElementById("bg-music");
             var vinyl = document.getElementById("vinyl");
             var btn = document.getElementById("play-btn");
-            var finalText = document.getElementById("final-text");
+            var nextBtn = document.getElementById("next-to-guess");
 
             if (music.paused) {
                 music.play();
                 vinyl.classList.add("spinning");
                 btn.innerText = "❚❚ إيقاف مؤقت";
-                finalText.style.display = "block";
+                nextBtn.style.display = "inline-block";
             } else {
                 music.pause();
                 vinyl.classList.remove("spinning");
                 btn.innerText = "► اسمعيها";
             }
+        }
+
+        function selectGuess(element) {
+            document.querySelectorAll('.guess-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            var resp = document.getElementById('guess-response');
+            resp.innerText = "مهما كان توقعك... أتمنى تعجبك! 💕";
+            resp.style.display = "block";
+
+            document.getElementById('next-to-letter').style.display = 'inline-block';
         }
     </script>
 </body>
